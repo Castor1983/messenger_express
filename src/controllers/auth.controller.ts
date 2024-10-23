@@ -1,7 +1,7 @@
 import {authService} from "../services/auth.service";
 import {NextFunction, Request, Response} from "express";
 import {IToken} from "../models/tokenModel";
-
+import * as jwt from "jsonwebtoken";
 
 class AuthController {
     public async register(
@@ -38,8 +38,13 @@ class AuthController {
         next: NextFunction,
     ): Promise<Response<void>> {
         try {
-            const accessToken = req.res.locals.accessToken as string;
+            const authHeader = req.headers.authorization;
 
+            if (!authHeader || !authHeader.startsWith('Bearer ')) {
+                return res.status(401).send({ message: 'No token provided' });
+            }
+
+            const accessToken = authHeader.split('Bearer ')[1];
             await authService.logout(accessToken);
 
             return res.sendStatus(204);

@@ -8,7 +8,7 @@ const storage = getStorage()
 const upload = multer({storage: multer.memoryStorage()})
 
 router.post('/send-message',  upload.array('files', 10), messagesController.send, )
-router.get('/messages',  messagesController.getMessages, )
+router.get('/messages/:chatId',  messagesController.getMessagesByChatId, )
 router.put("/edit-message/:chatId/:messageId", messagesController.edit);
 router.delete("/delete-message/:chatId/:messageId", messagesController.delete);
 router.post("/upload-files", messagesController.uploadFiles);

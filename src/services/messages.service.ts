@@ -1,7 +1,7 @@
 import { ApiError } from "../errors/api.error";
-import { IMessage, IMessageParams, IUpdateMessage } from "../models/messageModel";
+import {IChatMessages, IMessage, IMessageParams, IUpdateMessage } from "../models/messageModel";
 import {firebase} from "../firebase";
-import {collection, deleteDoc, doc, setDoc, updateDoc } from "firebase/firestore";
+import {collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore";
 
 
 class MessagesService {
@@ -27,7 +27,24 @@ class MessagesService {
             const status = e.status || 500;
             throw new ApiError(e.message, status);
         }
-    }public async delete ( params: IMessageParams): Promise<void> {
+    }
+    public async getMessagesByChatId ( params: Partial <IMessageParams>): Promise<IMessage[]> {
+        const {chatId} = params
+        try {
+            const messagesRef = collection(firebase, 'chats', chatId, 'messages'); // Путь к подколлекции
+            const snapshot = await getDocs(messagesRef);
+            const messages = snapshot.docs.map(doc =>({
+                messageId: doc.id,
+                ...doc.data() as IMessage
+            }));
+            return messages
+        } catch (e) {
+            const status = e.status || 500;
+            throw new ApiError(e.message, status);
+        }
+
+    }
+    public async delete ( params: IMessageParams): Promise<void> {
         const {chatId, messageId} = params
 
         try {

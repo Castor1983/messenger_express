@@ -3,6 +3,8 @@ export interface IMessage {
     receiverId: string,
     message: string,
     files?: string[]
+
+
 }
 export interface IUpdateMessage  {
     message: string,
@@ -11,5 +13,9 @@ export interface IUpdateMessage  {
 export interface IMessageParams {
     chatId: string,
     messageId: string
+
+}
+export interface IChatMessages {
+    messages: IMessage[]
 
 }

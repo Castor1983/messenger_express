@@ -1,7 +1,7 @@
 import * as jwt from "jsonwebtoken";
 import {IUser, IUserCredentials} from "../models/userModel";
 import {passwordService} from "./password.service";
-import {deleteField, getDoc, setDoc, doc, updateDoc} from "firebase/firestore";
+import {deleteField, getDoc, setDoc, doc, deleteDoc} from "firebase/firestore";
 import {firebase} from "../firebase";
 import {ApiError} from "../errors/api.error";
 import {ITokenPayload, IToken} from "../models/tokenModel";
@@ -54,12 +54,9 @@ class AuthService {
     }
     public async logout(accessToken: string): Promise<void> {
         try {
-            const payload = jwt.decode(accessToken)
-            console.log(payload)
-            const docRef = doc(firebase, 'tokensPair', "+389456743");
-            await updateDoc(docRef, {
-                accessToken: deleteField()
-            });
+            const payload = tokenService.checkToken(accessToken)
+            const docRef = doc(firebase, 'tokens', payload.userId);
+            await deleteDoc(docRef);
         } catch (e) {
             throw new ApiError(e.message, e.status);
         }

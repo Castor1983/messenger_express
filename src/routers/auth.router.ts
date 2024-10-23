@@ -10,6 +10,6 @@ const router= Router()
 router.post('/register', commonMiddleware.isBodyValid(UserValidator.register),
     userMiddleware.isPhoneUniq, authController.register, )
 router.post('/login', commonMiddleware.isBodyValid(UserValidator.login), authController.login, )
-router.post("/logout", authController.logout);
+router.delete("/logout", authController.logout);
 
 export const authRouter = router;

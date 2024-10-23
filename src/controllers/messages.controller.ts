@@ -2,7 +2,7 @@ import {authService} from "../services/auth.service";
 import {NextFunction, Request, Response} from "express";
 import {IToken} from "../models/tokenModel";
 import { messagesService } from "../services/messages.service";
-import { IMessageParams } from "../models/messageModel";
+import {IChatMessages, IMessageParams } from "../models/messageModel";
 
 class MessagesController {
     public async send(
@@ -22,19 +22,19 @@ class MessagesController {
             next(e);
         }
     }
-    public async getMessages (
+    public async getMessagesByChatId (
         req: Request,
         res: Response,
         next: NextFunction,
-    ): Promise<Response<IToken>> {
+    ): Promise<Response<IChatMessages>> {
         try {
-            const dto =req.body;
-            const tokensPair = await authService.login(dto);
-
-            return res.json(tokensPair);
+            const params = req.params;
+            const chatMessages = await messagesService.getMessagesByChatId(params);
+            return  res.send (chatMessages);
         } catch (e) {
             next(e);
         }
+
     }
     public async edit(
         req: Request<IMessageParams>,

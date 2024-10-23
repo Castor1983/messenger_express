@@ -2,7 +2,7 @@ import * as jwt from "jsonwebtoken";
 import {configs} from "../configs/configs";
 import {IToken, ITokenPayload, ITokenSchema} from "../models/tokenModel";
 import {ApiError} from "../errors/api.error";
-import {doc, setDoc} from "firebase/firestore";
+import {doc, getDoc, setDoc} from "firebase/firestore";
 import {firebase} from "../firebase";
 
 class TokenService {
@@ -27,15 +27,15 @@ class TokenService {
         }
         return
     }
-
     public checkToken(token: string): ITokenPayload {
        const verifyToken = jwt.verify(token, configs.JWT_ACCESS_SECRET) as ITokenPayload;
-            if (!verifyToken)
+       if (!verifyToken)
             {
             throw new ApiError("Token not valid!", 401);
         }
         return   verifyToken
     }
+
 
 }
 export const tokenService = new TokenService();
