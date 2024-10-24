@@ -1,5 +1,5 @@
 import { ApiError } from "../errors/api.error";
-import { IMessage, IMessageParams, IUpdateMessage } from "../models/messageModel";
+import { IMessage, IMessageParams, IUpdateMessage } from "../types/messageModel";
 import {firebase, storage} from "../firebase";
 import {collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";

@@ -1,6 +1,6 @@
 import * as jwt from "jsonwebtoken";
 import {configs} from "../configs/configs";
-import {IToken, ITokenPayload, ITokenSchema} from "../models/tokenModel";
+import {IToken, ITokenPayload, ITokenSchema} from "../types/tokenModel";
 import {ApiError} from "../errors/api.error";
 import {doc, getDoc, setDoc} from "firebase/firestore";
 import {firebase} from "../firebase";

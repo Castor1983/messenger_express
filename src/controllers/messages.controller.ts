@@ -1,7 +1,7 @@
 import {authService} from "../services/auth.service";
 import {NextFunction, Request, Response} from "express";
 import { messagesService } from "../services/messages.service";
-import {IChatMessages, IMessageParams } from "../models/messageModel";
+import {IChatMessages, IMessageParams } from "../types/messageModel";
 
 class MessagesController {
     public async send(

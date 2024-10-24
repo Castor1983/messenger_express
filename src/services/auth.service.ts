@@ -1,10 +1,10 @@
 import * as jwt from "jsonwebtoken";
-import {IUser, IUserCredentials} from "../models/userModel";
+import {IUser, IUserCredentials} from "../types/userModel";
 import {passwordService} from "./password.service";
 import {deleteField, getDoc, setDoc, doc, deleteDoc} from "firebase/firestore";
 import {firebase} from "../firebase";
 import {ApiError} from "../errors/api.error";
-import {ITokenPayload, IToken} from "../models/tokenModel";
+import {ITokenPayload, IToken} from "../types/tokenModel";
 import {tokenService} from "./token.service";
 import {JwtPayload} from "jsonwebtoken";
 

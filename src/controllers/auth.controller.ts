@@ -1,7 +1,6 @@
 import {authService} from "../services/auth.service";
 import {NextFunction, Request, Response} from "express";
-import {IToken} from "../models/tokenModel";
-import * as jwt from "jsonwebtoken";
+import {IToken} from "../types/tokenModel";
 
 class AuthController {
     public async register(
