@@ -1,6 +1,6 @@
 import {authService} from "../services/auth.service";
 import {NextFunction, Request, Response} from "express";
-import {IToken} from "../types/tokenModel";
+import {IToken} from "../types/tokenType";
 
 class AuthController {
     public async register(
