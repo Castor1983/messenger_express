@@ -1,3 +1,5 @@
+import { ParamsDictionary } from 'express-serve-static-core';
+
 export interface IMessage {
     senderId: string,
     receiverId: string,
@@ -10,7 +12,7 @@ export interface IUpdateMessage  {
     message: string,
     files?: string []
 }
-export interface IMessageParams {
+export interface IMessageParams extends ParamsDictionary {
     chatId: string,
     messageId: string
 
