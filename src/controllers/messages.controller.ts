@@ -45,7 +45,7 @@ class MessagesController {
         try {
 
 
-            await messagesService.edit(dto, params);
+          await messagesService.edit(dto, params);
 
             return res.sendStatus(204);
         } catch (e) {

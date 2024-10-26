@@ -12,19 +12,14 @@ class MessagesService {
         try {
             const messageId = doc(collection(firebase, `chats/${chatId}/messages`)).id;
             const messageRef = doc(firebase, `chats/${chatId}/messages`, messageId);
-            if (files)
-            {
-                try {
-                    for (const file of files) {
-                        const storageRef = ref(storage, `uploads/${file.originalname}-${Date.now()}`);
-                        await uploadBytes(storageRef, file.buffer);
-                        const fileUrl = await getDownloadURL(storageRef);
-                        fileUrls.push(fileUrl);
-                    }
-                } catch (e) {
-                    const status = e.status || 500;
-                    throw new ApiError(e.message, status);
-                }}
+            if (files) {
+                for (const file of files) {
+                    const storageRef = ref(storage, `uploads/${file.originalname}-${Date.now()}`);
+                    await uploadBytes(storageRef, file.buffer);
+                    const fileUrl = await getDownloadURL(storageRef);
+                    fileUrls.push(fileUrl);
+                }
+            }
             await setDoc(messageRef, { ...dto, files: fileUrls, create: new Date(),});
         } catch (e) {
             throw new ApiError(e.message, e.status);
@@ -35,7 +30,11 @@ class MessagesService {
 
         try {
             const messageRef = doc(firebase, `chats/${chatId}/messages/${messageId}`);
-             const updateMessage = getDoc(messageRef);
+             const updateMessage: DocumentSnapshot = await getDoc(messageRef);
+            if (!updateMessage.exists())
+            {
+                throw new ApiError("message not found", 404);
+            }
                  await updateDoc(messageRef, { ...dto, update: new Date(),});
 
         } catch (e) {
@@ -72,10 +71,10 @@ class MessagesService {
             const message: DocumentSnapshot =  await getDoc (messageRef)
             if (!message.exists())
             {
-                throw new ApiError( 'message not found', 404);
+                throw new ApiError("message not found", 404);
             }
             await deleteDoc(messageRef);
-        } catch (e) {
+        } catch (e: any) {
             const status = e.status || 500;
             throw new ApiError(e.message, status);
         }
