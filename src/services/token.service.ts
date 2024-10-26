@@ -28,7 +28,7 @@ class TokenService {
         return
     }
     public checkToken(token: string): ITokenPayload {
-       const verifyToken = jwt.verify(token, configs.JWT_ACCESS_SECRET) as ITokenPayload;
+       const verifyToken = jwt.verify(token , configs.JWT_ACCESS_SECRET) as ITokenPayload;
        if (!verifyToken)
             {
             throw new ApiError("Token not valid!", 401);
