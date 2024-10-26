@@ -1,12 +1,10 @@
-import * as jwt from "jsonwebtoken";
 import {IUser, IUserCredentials} from "../types/userType";
 import {passwordService} from "./password.service";
-import {deleteField, getDoc, setDoc, doc, deleteDoc} from "firebase/firestore";
+import {getDoc, setDoc, doc, deleteDoc} from "firebase/firestore";
 import {firebase} from "../firebase";
 import {ApiError} from "../errors/api.error";
-import {ITokenPayload, IToken} from "../types/tokenType";
+import {IToken} from "../types/tokenType";
 import {tokenService} from "./token.service";
-import {JwtPayload} from "jsonwebtoken";
 
 class AuthService {
     public async register(dto: IUser): Promise<void> {

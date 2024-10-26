@@ -17,6 +17,7 @@ class AuthController {
             next(e);
         }
     }
+
     public async login (
         req: Request,
         res: Response,
@@ -31,6 +32,7 @@ class AuthController {
             next(e);
         }
     }
+
     public async logout(
         req: Request,
         res: Response,

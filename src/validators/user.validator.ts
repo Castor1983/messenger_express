@@ -4,9 +4,9 @@ import { regexConstant } from "../constants/regex.constant";
 
 export class UserValidator {
   static nickName = joi.string().min(2).max(50).trim();
-  static email = joi.string().regex(regexConstant.EMAIL).trim();
   static password = joi.string().regex(regexConstant.PASSWORD).trim();
-  static phone = joi.string();
+  static phone = joi.string().regex(regexConstant.PHONENUMBER);
+  static message = joi.string().max(200).regex(regexConstant.PROFANITY);
 
 
 
@@ -20,17 +20,12 @@ export class UserValidator {
     phone: this.phone.required(),
     password: this.password.required(),
   });
-
-  static forgotPassword = joi.object({
-    email: this.email.required(),
+  static edit = joi.object({
+    message: this.message.required()
   });
-
-  static setForgotPassword = joi.object({
-    newPassword: this.password.required(),
-  });
-
-  static setNewPassword = joi.object({
-    password: this.password.required(),
-    newPassword: this.password.required(),
+  static send = joi.object({
+    senderId: this.phone.required(),
+    receiverId: this.phone.required(),
+    message: this.message.required()
   });
 }

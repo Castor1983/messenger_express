@@ -1,4 +1,3 @@
-import {authService} from "../services/auth.service";
 import {NextFunction, Request, Response} from "express";
 import { messagesService } from "../services/messages.service";
 import {IChatMessages, IMessageParams } from "../types/messageType";
@@ -21,6 +20,7 @@ class MessagesController {
             next(e);
         }
     }
+
     public async getMessagesByChatId (
         req: Request,
         res: Response,
@@ -35,6 +35,7 @@ class MessagesController {
         }
 
     }
+
     public async edit(
         req: Request<IMessageParams>,
         res: Response,
@@ -52,6 +53,7 @@ class MessagesController {
             next(e);
         }
     }
+
     public async delete(
         req: Request<IMessageParams>,
         res: Response,
@@ -66,8 +68,6 @@ class MessagesController {
             next(e);
         }
     }
-
 }
-
 
 export const messagesController = new MessagesController();

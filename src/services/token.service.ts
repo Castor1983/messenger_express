@@ -2,7 +2,7 @@ import * as jwt from "jsonwebtoken";
 import {configs} from "../configs/configs";
 import {IToken, ITokenPayload, ITokenSchema} from "../types/tokenType";
 import {ApiError} from "../errors/api.error";
-import {doc, getDoc, setDoc} from "firebase/firestore";
+import {doc, setDoc} from "firebase/firestore";
 import {firebase} from "../firebase";
 
 class TokenService {
@@ -10,12 +10,11 @@ class TokenService {
         const accessToken = jwt.sign(payload, configs.JWT_ACCESS_SECRET, {
             expiresIn: "1h",
         });
-
-
         return {
             accessToken,
         };
     }
+
     public async createToken (dto: ITokenSchema):Promise<IToken> {
         try {
             const id = dto.userId;
@@ -27,6 +26,7 @@ class TokenService {
         }
         return
     }
+
     public checkToken(token: string): ITokenPayload {
        const verifyToken = jwt.verify(token , configs.JWT_ACCESS_SECRET) as ITokenPayload;
        if (!verifyToken)
@@ -35,7 +35,5 @@ class TokenService {
         }
         return   verifyToken
     }
-
-
 }
 export const tokenService = new TokenService();
