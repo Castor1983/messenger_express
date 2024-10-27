@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "caa91789-1bc7-4f05-a315-6df564182d3f",
+		"name": "CRUD-messenger",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28731292"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nickName\": \"Alex\",\r\n    \"phone\": \"0958086750\",\r\n    \"password\": \"Qx25698!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\": \"0958086750\",\r\n    \"password\": \"Qx25698!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwOTU4MDg2NzUwIiwiaWF0IjoxNzI5ODY1MjIwLCJleHAiOjE3Mjk4Njg4MjB9.Le_Z9HMjoP1tuLT_tbWXKPbDQnl2qUKUzx3T_mQkwKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Bearer",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5001/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "chat",
+			"item": [
+				{
+					"name": "edit-message",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwOTU4MDg2NzUwIiwiaWF0IjoxNzI5OTI5MTkxLCJleHAiOjE3Mjk5MzI3OTF9.nes1T4f6fBMVbUoQeJvMXRz2_7zXe2hOjdk6pLQKKqs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"message\": \"goodbye\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/chat/edit-message/0663444107_0958086750/FPv69IyAD7ed5eq9ou5D",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"chat",
+								"edit-message",
+								"0663444107_0958086750",
+								"FPv69IyAD7ed5eq9ou5D"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-messages-by-chatId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"message\": \"Hello, world31\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/chat/messages/Alex_Sancho",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"chat",
+								"messages",
+								"Alex_Sancho"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-message",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"message\": \"Hello, world31\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/chat/delete-message/user1_user3/8olDr3pAOSLVxIhlKHb0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"chat",
+								"delete-message",
+								"user1_user3",
+								"8olDr3pAOSLVxIhlKHb0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "send-message",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwOTU4MDg2NzUwIiwiaWF0IjoxNzMwMDAxMTY0LCJleHAiOjE3MzAwMDQ3NjR9.0jj6gpOOSFdDKI9OzuRGDGDQe98Xscdfe5BbB6w_mMw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"senderId\":\"0958086750\",\r\n \"receiverId\":\"0958086750\",\r\n \"message\":\"0958086750\"   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/chat/send-message",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"chat",
+								"send-message"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
