@@ -1,13 +1,16 @@
 import { ParamsDictionary } from 'express-serve-static-core';
 
-export interface IMessage {
+export interface IMessage<T> {
     senderId: string,
     receiverId: string,
     message: string,
-    files?:  string[]
+    files?:  T[]
 
 
 }
+export type TextMessage = IMessage<string>;
+export type FormDataMessage = IMessage<FormData>;
+
 export interface IUpdateMessage  {
     message: string,
     files?: string []
@@ -18,6 +21,6 @@ export interface IMessageParams extends ParamsDictionary {
 
 }
 export interface IChatMessages {
-    messages: IMessage[]
+    messages: TextMessage[]
 
 }

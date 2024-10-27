@@ -1,23 +1,23 @@
 import { NextFunction, Request, Response } from "express";
-import { ObjectSchema } from "joi";
-
+import { ObjectSchema, ValidationError } from "joi";
 import { ApiError } from "../errors/api.error";
+
 
 class CommonMiddleware {
 
-  public isBodyValid(validator: ObjectSchema) {
-    return (req: Request, res: Response, next: NextFunction) => {
+  public isBodyValid<T>(validator: ObjectSchema<T>) {
+    return async (req: Request, res: Response, next: NextFunction) => {
       try {
-        const { error, value } = validator.validate(req.body);
 
-        if (error) {
-          throw new ApiError(error.message, 400);
-        }
-
+        const value = await validator.validateAsync(req.body);
         req.body = value;
         next();
       } catch (e) {
-        next(e);
+        if (e instanceof ValidationError) {
+          next(new ApiError(e.message, 400));
+        } else {
+          next(e);
+        }
       }
     };
   }

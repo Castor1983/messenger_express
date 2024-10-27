@@ -7,7 +7,7 @@ import { UserValidator } from "../validators/user.validator";
 
 const router= Router()
 
-router.post('/send-message',   commonMiddleware.isBodyValid(UserValidator.send), authMiddleware.checkAccessToken, upload.array('files', 10), messagesController.send);
+router.post('/send-message',   commonMiddleware.isBodyValid(UserValidator.send), authMiddleware.checkAccessToken, messagesController.send);
 router.get('/messages/:chatId', authMiddleware.checkAccessToken, messagesController.getMessagesByChatId);
 router.put("/edit-message/:chatId/:messageId", commonMiddleware.isBodyValid(UserValidator.edit), authMiddleware.checkAccessToken, messagesController.edit);
 router.delete("/delete-message/:chatId/:messageId", authMiddleware.checkAccessToken, messagesController.delete);
