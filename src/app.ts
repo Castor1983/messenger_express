@@ -9,7 +9,7 @@ import cors from "cors"
 const app = express();
 app.use(cors({
     origin: configs.FRONT_URL,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Дозволені методи
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
 }));
 
