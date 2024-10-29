@@ -5,8 +5,14 @@ import {NextFunction, Request, Response} from "express";
 import {ApiError} from "./errors/api.error";
 import { messagesRouter } from './routers/messages.router';
 import multer from 'multer';
-
+import cors from "cors"
 const app = express();
+app.use(cors({
+    origin: configs.FRONT_URL,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Дозволені методи
+    credentials: true,
+}));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(multer().array('files', 10))
