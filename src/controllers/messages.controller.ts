@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response} from "express";
 import { messagesService } from "../services/messages.service";
-import {IChatMessages, IMessageParams } from "../types/messageType";
+import {IChatMessages, IMessageFormData, IMessageParams } from "../types/messageType";
 
 class MessagesController {
     public async send(
@@ -11,7 +11,7 @@ class MessagesController {
     ): Promise<Response<void>> {
 
         try {
-            const dto =req.body;
+            const dto =req.body as IMessageFormData;
             const files = req.files as Express.Multer.File[];
                 await messagesService.send(dto, files);
 

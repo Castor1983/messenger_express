@@ -1,11 +1,11 @@
 import { ApiError } from "../errors/api.error";
-import { IMessage, IMessageParams, IUpdateMessage, TextMessage} from "../types/messageType";
+import { IMessageFormData, IMessageParams, IUpdateMessage, TextMessage} from "../types/messageType";
 import {firebase, storage} from "../firebase";
 import {collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc, DocumentSnapshot, QuerySnapshot, DocumentData} from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 class MessagesService {
-    public async send (dto: IMessage<FormData>, files: Express.Multer.File[] ): Promise<void> {
+    public async send (dto: IMessageFormData, files: Express.Multer.File[] ): Promise<void> {
         const {senderId, receiverId} = dto;
         const chatId = [senderId, receiverId].sort().join('_');
         const fileUrls: string[] = [];
