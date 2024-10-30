@@ -7,7 +7,7 @@ import { IUser } from "../types/userType";
 export class UserValidator {
   static nickName = joi.string().min(2).max(50).trim();
   static password = joi.string().regex(regexConstant.PASSWORD).trim();
-  static phone = joi.string();
+  static phone = joi.string().regex(regexConstant.PHONENUMBER);
   static message = joi.string().max(200);
 
   static register = joi.object<IUser>({
