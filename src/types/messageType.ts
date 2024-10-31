@@ -4,6 +4,7 @@ export interface IMessage<T> {
     senderId: string,
     receiverId: string,
     message: string,
+    create: Date,
     files?:  T[]
 
 
