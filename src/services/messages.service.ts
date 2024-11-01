@@ -5,6 +5,7 @@ import {collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc, Document
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 class MessagesService {
+    
     public async send (dto: IMessageFormData, files: Express.Multer.File[] ): Promise<void> {
         const {senderId, receiverId} = dto;
         const chatId = [senderId, receiverId].sort().join('_');
@@ -25,23 +26,43 @@ class MessagesService {
             throw new ApiError(e.message, e.status);
         }
     }
+    
+    public async getMessageById ( params: IMessageParams): Promise <TextMessage> {
+        const {chatId, messageId} = params
+
+        try {
+            const messageRef = doc(firebase, `chats/${chatId}/messages/${messageId}`);
+             const messageSnapshot: DocumentSnapshot<DocumentData> = await getDoc(messageRef);
+            if (!messageSnapshot.exists())
+            {
+                throw new ApiError("message not found", 404);
+            }
+            const message = messageSnapshot.data() as TextMessage
+            return message
+        } catch (e) {
+            const status = e.status || 500;
+            throw new ApiError(e.message, status);
+        }
+    }
+    
     public async edit (dto: IUpdateMessage, params: IMessageParams): Promise<void> {
         const {chatId, messageId} = params
 
         try {
             const messageRef = doc(firebase, `chats/${chatId}/messages/${messageId}`);
-             const updateMessage: DocumentSnapshot = await getDoc(messageRef);
+            const updateMessage: DocumentSnapshot = await getDoc(messageRef);
             if (!updateMessage.exists())
             {
                 throw new ApiError("message not found", 404);
             }
-                 await updateDoc(messageRef, { ...dto, update: new Date(),});
+            await updateDoc(messageRef, { ...dto, update: new Date(),});
 
         } catch (e) {
             const status = e.status || 500;
             throw new ApiError(e.message, status);
         }
     }
+    
     public async getMessagesByChatId ( params: Partial <IMessageParams>): Promise<TextMessage[]> {
         const {chatId} = params
         try {
@@ -63,6 +84,7 @@ class MessagesService {
         }
 
     }
+    
     public async delete ( params: IMessageParams): Promise<void> {
         const {chatId, messageId} = params
 
