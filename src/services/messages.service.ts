@@ -37,8 +37,8 @@ class MessagesService {
             {
                 throw new ApiError("message not found", 404);
             }
-            const message = messageSnapshot.data() as TextMessage
-            return message
+            return messageSnapshot.data() as TextMessage
+            
         } catch (e) {
             const status = e.status || 500;
             throw new ApiError(e.message, status);
