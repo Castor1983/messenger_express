@@ -22,6 +22,7 @@ export class UserValidator {
   });
 
   static edit = joi.object<IUpdateMessage>({
+    receiverId: this.phone.required(),
     message: this.message.required()
   });
 

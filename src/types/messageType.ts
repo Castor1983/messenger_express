@@ -21,8 +21,8 @@ export type TextMessage = IMessage<string>;
 export type FormDataMessage = IMessage<FormData>;
 
 export interface IUpdateMessage  {
+    receiverId: string,
     message: string,
-    files?: string []
 }
 export interface IMessageParams extends ParamsDictionary {
     chatId: string,
