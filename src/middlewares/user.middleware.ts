@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
+import {firebase} from "../firebase";
 
 import { ApiError } from "../errors/api.error";
 import {doc, getDoc} from "firebase/firestore";
-import {firebase} from "../firebase";
 
 class UserMiddleware {
 
@@ -19,6 +19,7 @@ class UserMiddleware {
       next(e);
     }
   }
+  
   public async isReceiver(req: Request, res: Response, next: NextFunction) {
     try {
       const {senderId, receiverId } = req.body;
@@ -35,7 +36,6 @@ class UserMiddleware {
       next(e);
     }
   }
-
 }
 
 export const userMiddleware = new UserMiddleware();

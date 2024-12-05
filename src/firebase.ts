@@ -1,9 +1,9 @@
 import {getFirestore} from "firebase/firestore";
 import {getStorage} from "firebase/storage";
 import {initializeApp} from "firebase/app";
-import {configs} from "./configs/configs";
 import multer from "multer";
 
+import {configs} from "./configs/configs";
 
 const app = initializeApp(configs.FIREBASE)
  export const firebase = getFirestore(app);

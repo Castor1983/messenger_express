@@ -1,8 +1,9 @@
-import { ApiError } from "../errors/api.error";
-import { IMessageFormData, IMessageParams, IUpdateMessage, TextMessage} from "../types/messageType";
 import {firebase, storage} from "../firebase";
 import {collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc, DocumentSnapshot, QuerySnapshot, DocumentData} from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+
+import { ApiError } from "../errors/api.error";
+import { IMessageFormData, IMessageParams, IUpdateMessage, TextMessage} from "../types/messageType";
 
 class MessagesService {
     

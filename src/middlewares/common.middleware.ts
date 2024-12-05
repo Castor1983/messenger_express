@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { ObjectSchema, ValidationError } from "joi";
+
 import { ApiError } from "../errors/api.error";
 
 
@@ -21,7 +22,6 @@ class CommonMiddleware {
       }
     };
   }
-
 }
 
 export const commonMiddleware = new CommonMiddleware();

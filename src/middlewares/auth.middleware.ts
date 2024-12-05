@@ -1,10 +1,10 @@
-
 import { NextFunction, Request, Response } from "express";
 
 import { ApiError } from "../errors/api.error";
 import { tokenService } from "../services/token.service";
 
 class AuthMiddleware {
+  
   public async checkAccessToken(
     req: Request,
     res: Response,
@@ -25,7 +25,6 @@ class AuthMiddleware {
       next(e);
     }
   }
-
 }
 
 export const authMiddleware = new AuthMiddleware();

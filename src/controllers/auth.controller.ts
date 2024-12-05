@@ -1,5 +1,6 @@
-import {authService} from "../services/auth.service";
 import {NextFunction, Request, Response} from "express";
+
+import {authService} from "../services/auth.service";
 import {IToken} from "../types/tokenType";
 
 class AuthController {
@@ -11,7 +12,6 @@ class AuthController {
         try {
             const dto =req.body;
             await authService.register(dto);
-
             return res.sendStatus(201);
         } catch (e) {
             next(e);
@@ -26,7 +26,6 @@ class AuthController {
         try {
             const dto =req.body;
             const token = await authService.login(dto);
-
             return res.json(token);
         } catch (e) {
             next(e);
@@ -47,7 +46,6 @@ class AuthController {
 
             const accessToken = authHeader.split('Bearer ')[1];
             await authService.logout(accessToken);
-
             return res.sendStatus(204);
         } catch (e) {
             next(e);

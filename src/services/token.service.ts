@@ -1,9 +1,10 @@
 import * as jwt from "jsonwebtoken";
+import {doc, setDoc} from "firebase/firestore";
+import {firebase} from "../firebase";
+
 import {configs} from "../configs/configs";
 import {IToken, ITokenPayload, ITokenSchema} from "../types/tokenType";
 import {ApiError} from "../errors/api.error";
-import {doc, setDoc} from "firebase/firestore";
-import {firebase} from "../firebase";
 
 class TokenService {
     public generateToken(payload: ITokenPayload): IToken {
@@ -36,4 +37,5 @@ class TokenService {
         return   verifyToken
     }
 }
+
 export const tokenService = new TokenService();

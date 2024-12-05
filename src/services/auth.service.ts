@@ -1,7 +1,8 @@
-import {IUser, IUserCredentials} from "../types/userType";
-import {passwordService} from "./password.service";
 import {getDoc, setDoc, doc, deleteDoc} from "firebase/firestore";
 import {firebase} from "../firebase";
+
+import {IUser, IUserCredentials} from "../types/userType";
+import {passwordService} from "./password.service";
 import {ApiError} from "../errors/api.error";
 import {IToken} from "../types/tokenType";
 import {tokenService} from "./token.service";
